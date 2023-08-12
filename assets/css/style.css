@@ -1,0 +1,73 @@
+/*取消圆角*/
+* {
+	border-radius: 0 !important;
+}
+
+/*背景色与缩进*/
+body {
+    scale: 0.6;
+    padding-left: 5rem;
+}
+
+/*六十四卦*/
+h3.title {
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 20px;
+}
+
+/*爻*/
+ul.gua>li>span {
+    display: inline-block;
+    height: 35px;
+    margin-bottom: 12px;
+}
+
+/*分隔线*/
+ul.gua>li:nth-child(3) {
+	padding-bottom: 15px;
+	margin-bottom: 30px;
+	border-bottom: 1px dashed #ccc;
+}
+
+/*阳爻*/
+li.yang>span:nth-child(1) {
+    background: black;
+    width: 100%;
+}
+li.yang-active>span:nth-child(1) {
+    background: #f44336;
+}
+
+/*阴爻*/
+li.yin>span:nth-child(1), 
+li.yin>span:nth-child(3) {
+    background: black;
+    width: 42.5%;
+}
+li.yin>span:nth-child(2) {
+    background: none;
+    width: 15%;
+}
+li.yin-active>span:nth-child(1), 
+li.yin-active>span:nth-child(3) {
+    background: #0d6efd;
+}
+
+/*体用*/
+.ti, .yong {
+    position: absolute;
+    left: -8rem;
+    font-size: 4rem;
+}
+.ti.up, .yong.up {
+    top: 32%;
+}
+.ti.down, .yong.down {
+    top: 67%;
+}
+.ti:after {
+    content: "体";
+}
+.yong:after {
+    content: "用";
+}
