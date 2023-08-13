@@ -2,9 +2,9 @@ $(function() {
 
 	// 所报数字
 	var num = parseInt(getUrlParam("num"));
-	if (!num) {
-		var num = prompt("请报起卦数字：");
-		if (!num || isNaN(num)) {
+	if (isNaN(num)) {
+		var num = parseInt(prompt("请报起卦数字："));
+		if (isNaN(num)) {
 		    location.reload();
 		} else {
 			location.href = "?num=" + num;
@@ -26,7 +26,7 @@ $(function() {
 	// 年月日时
 	var ymd = getUrlParam("ymd");
 	var hm = getUrlParam("hm");
-	var date = new Date(moment(ymd).format('YYYY/MM/DD') + " " + moment(hm).format('HH:mm'));
+	var date = new Date(moment(ymd+"T"+hm).format('YYYY/MM/DD HH:mm'));
 	if (!isValidDate(date)) {
 		date = new Date();
 		ymd = moment().format('YYYYMMDD');
@@ -35,7 +35,7 @@ $(function() {
 	}
 	var now = Lunar.fromDate(date);
 	// 年支序数
-	var year = parseInt(zhis[now.getYearZhi()]);
+	var year = parseInt(zhis[now.getYearZhiExact()]);
 	// 农历月数
 	var month = parseInt(Math.abs(now.getMonth()));
 	// 农历日数
@@ -43,11 +43,15 @@ $(function() {
 	// 时支序数
 	var time = parseInt(zhis[now.getTimeZhi()]);
 	// 当前四柱
-	var current = now.getYearZhi() + "年" + zhisWuXing[now.getYearZhi()];
-	current += " <strong>" + now.getMonthZhi() + "月" + zhisWuXing[now.getMonthZhi()] + "</strong>";
-	current += " " + now.getDayZhi() + "日" + zhisWuXing[now.getDayZhi()];
-	current += " " + now.getTimeZhi() + "时" + zhisWuXing[now.getTimeZhi()];
+	var current = now.getYearInGanZhiExact() + "年" + zhisWuXing[now.getYearZhiExact()];
+	current += " <strong>" + now.getMonthInGanZhiExact() + "月" + zhisWuXing[now.getMonthZhiExact()] + "</strong>";
+	current += " " + now.getDayInGanZhiExact() + "日" + zhisWuXing[now.getDayZhiExact()];
+	current += " " + now.getTimeInGanZhi() + "时" + zhisWuXing[now.getTimeZhi()];
 	$('#current').html(current);
+
+	// 今日日期
+	var today = now.getYearInGanZhiExact() + "年" + now.getMonthInChinese() + "月" + now.getDayInChinese();
+	$('#today').html(today);
 	
 	// 先天八卦数
 	var guas = {
@@ -71,13 +75,13 @@ $(function() {
 	}
 	var upGua = guas[upGuaNum];
 	// 下卦
-	var downGuaNum = (year+month+day+time+num)%8;
+	var downGuaNum = (year+month+day+num+time)%8;
 	if (downGuaNum == 0) {
 		downGuaNum = 8;
 	}
 	var downGua = guas[downGuaNum];
 	// 动爻
-	var activeYaoNum = (year+month+day+time+num)%6;
+	var activeYaoNum = (year+month+day+num+time)%6;
 	if (activeYaoNum == 0) {
 		activeYaoNum = 6;
 	}

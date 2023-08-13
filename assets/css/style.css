@@ -6,7 +6,8 @@
 /*背景色与缩进*/
 body {
     scale: 0.6;
-    padding-left: 5rem;
+    padding-left: 10rem;
+    padding-right: 5rem;
 }
 
 /*六十四卦*/
