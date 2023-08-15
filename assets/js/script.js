@@ -3,13 +3,13 @@ $(function() {
   // URL初始化
   var href="";
   // 所报数字
-  var num=parseInt(getUrlParam("num"));
-  if (isNaN(num)) {
-    var num=parseInt(prompt("请报起卦数字："));
+  var num=getUrlParam("num");
+  if (num==null || isNaN(num)) {
+    num=parseInt(prompt("请报起卦数字："));
     if (isNaN(num)) {
         location.reload();
     } else {
-      href+="?num="+num;
+      href="?num="+num;
     }
   }
   $("#num").html(num);
@@ -21,7 +21,7 @@ $(function() {
     date=new Date();
     ymd=moment().format("YYYYMMDD");
     hm=moment().format("HHmm");
-    href+="&ymd="+ymd+"&hm="+hm;
+    href="?num="+num+"&ymd="+ymd+"&hm="+hm;
   }
   if (href) {
     location.href=href;
@@ -299,9 +299,8 @@ $(function() {
 });
 
 function getUrlParam(name) {
-  var reg=new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
-  var r=window.location.search.substr(1).match(reg);
-  if (r!=null) return unescape(r[2]);return null;
+  let url = new URL(location.href);
+  return url.searchParams.get(name);
 }
 
 function isValidDate(date) {
