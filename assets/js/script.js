@@ -244,16 +244,25 @@ $(function() {
   var benPinyin=the64Guas[guasXiang[benUp]+guasXiang[benDown]]["pinyin"];
   $("#ben .card-body .title").html(benName);
   $("#ben .card-body .pinyin").html(benPinyin);
+  $("#ben").on("click", function() {
+    window.open("https://e.chengyishu.net/data/?gua="+benName,"_blank");
+  });
   // 互卦卦名
   var huName=the64Guas[guasXiang[huUp]+guasXiang[huDown]]["name"];
   var huPinyin=the64Guas[guasXiang[huUp]+guasXiang[huDown]]["pinyin"];
   $("#hu .card-body .title").html(huName);
   $("#hu .card-body .pinyin").html(huPinyin);
+  $("#hu").on("click", function() {
+    window.open("https://e.chengyishu.net/data/?gua="+huName,"_blank");
+  });
   // 变卦卦名
   var bianName=the64Guas[guasXiang[bianUp]+guasXiang[bianDown]]["name"];
   var bianPinyin=the64Guas[guasXiang[bianUp]+guasXiang[bianDown]]["pinyin"];
   $("#bian .card-body .title").html(bianName);
   $("#bian .card-body .pinyin").html(bianPinyin);
+  $("#bian").on("click", function() {
+    window.open("https://e.chengyishu.net/data/?gua="+bianName,"_blank");
+  });
 
   // 画卦
   for (var i in benGua) {
