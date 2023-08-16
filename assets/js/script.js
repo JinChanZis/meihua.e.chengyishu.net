@@ -5,13 +5,14 @@ $(function() {
   // 所报数字
   var num=getUrlParam("num");
   if (num==null || isNaN(num)) {
-    num=parseInt(prompt("请报起卦数字："));
+    num=prompt("请报起卦数字：");
     if (isNaN(num)) {
         location.reload();
     } else {
       href="?num="+num;
     }
   }
+  num = parseInt(num);
   $("#num").html(num);
   // 年月日时
   var ymd=getUrlParam("ymd");
